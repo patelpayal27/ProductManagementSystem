@@ -25,5 +25,3 @@ ProductManagementSystem is developed in Angular 5 in VS Code
 6) You can login using two users i)admin - admin1234 ii)user - user1234. "admin" user can see all menus, whereas "user" can see only limited menus. (Authentication and Authorization on basis of credentials and role respectively.)
 
 
-TO DO 
-change in GlobalMembersService 

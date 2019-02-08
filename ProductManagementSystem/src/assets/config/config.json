@@ -1,0 +1,4 @@
+{
+    "baseUrl" : "http://localhost:51282/api/",
+    "LoggingEnabled": true
+}

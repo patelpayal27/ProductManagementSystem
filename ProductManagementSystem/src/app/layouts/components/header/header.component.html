@@ -1,0 +1,17 @@
+<header>
+  <a routerLink="/" class="logo" id="logo" >
+    <span class="logo-lg" id="logo-lg">
+      <img src="assets/img/contrado.svg" width="50px" height="40px" />
+    </span>
+  </a>
+  <h1>
+    Product Management System
+  </h1>
+  <ul class="pull-right userLog">
+    <li class="logout">
+      <p-menu #menu popup="popup" [model]="items"></p-menu>
+      <i class="fa fa-user-o" aria-hidden="true"></i>
+      <button type="button" pButton icon="fa fa-user-o" label="Show" (click)="menu.toggle($event)">Welcome <span [innerHtml]="username">User</span></button>
+    </li>
+  </ul>
+</header>

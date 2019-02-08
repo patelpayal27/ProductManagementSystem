@@ -1,0 +1,27 @@
+.userLog .ui-menu{left:28px !important;background:#fff !important;top:65px !important;width:120px;}
+.userLog .ui-menu .ui-menuitem-link{color:#707276;text-align: left;}
+.userLog .ui-menu .ui-menuitem-link .fa{padding-right:12px;}
+.ui-menu .ui-menuitem{display: block;height:30px;padding:0px;margin:0px;}
+.userLog button{background:transparent;color:#fff;position:relative;}
+.userLog .ui-menu .ui-menuitem-link:hover{background: none;color:#00aeef;}
+.userLog button:after{
+    content: "\f107";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;position: absolute;top:-1px;
+color:#fff;
+    font-size: 16px;padding-left:8px;
+
+}
+.userLog li.logout {
+    padding-top: 22px;
+}
+.userLog .ui-menu .ui-menuitem-link .fa {
+     
+    padding-right: 19px;
+    padding-left: 6px;
+}
+.profilepicture{
+    margin-top: -18px;
+}

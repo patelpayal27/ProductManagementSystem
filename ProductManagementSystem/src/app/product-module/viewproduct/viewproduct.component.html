@@ -1,0 +1,119 @@
+<div class="inner-content" id="inner-content">
+    <ol class="breadcrumb mit-breadcrum">
+        <li class="breadcrumb-item">
+            <a routerLink='/home'>Home</a>
+        </li>
+        <li class="breadcrumb-item active"> Products Management </li>
+    </ol>
+    <div *ngIf="show">
+        <div style="margin-top:-15px; margin-bottom: 5px;">
+            <p-dropdown [options]="ddvProduct" [(ngModel)]="selddvProduct" placeholder="Select Product to View/Edit" optionLabel="value" [showClear]="true"></p-dropdown>
+            <input class="btn btn-default" type="button" value="Edit Product" (click)="manageProduct('edit');" style="margin-left:10px">
+            <input class="btn btn-default" type="button" value="View Product" (click)="manageProduct('view');" style="margin-left:10px">
+            <input class="btn btn-default" type="button" value="Add New Product" (click)="manageProduct('add');" style="margin-left:10px">
+            <p-dropdown [options]="ddvCategory" [(ngModel)]="selddvCategory" placeholder="Select Category to display Product" optionLabel="value" [showClear]="true" (onChange)="selproductByCat()"></p-dropdown>
+        </div>
+        <div class="card view-card">
+            <div class="card-body view-card-body">
+                <p-table #dt [columns]="productsCols" [value]="prdctsDetails" [rows]="5"
+                [rowsPerPageOptions]="[5,10,25,50,75,100]" [paginator]="true" 
+                [resizableColumns]="true">
+                    <ng-template pTemplate="paginatorleft">
+                        <span [innerHtml]="productsCountTxt">
+                            Showing total 50 entries
+                        </span>
+                    </ng-template>
+                    <ng-template pTemplate="caption">
+                        <div style="text-align: right">
+                            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                            <input class="search-filter" type="text" pInputText size="40" placeholder="Search" (input)="dt.filterGlobal($event.target.value, 'contains')" #sourcefilter>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="colgroup" let-columns>
+                        <colgroup>
+                            <col *ngFor="let col of columns" [style.width]="col.width">
+                        </colgroup>
+                    </ng-template>
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th *ngFor="let col of columns" [pSortableColumn]="col.field" pResizableColumn>
+                                {{col.header}}
+                                <p-sortIcon [field]="col.field"></p-sortIcon>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr>
+                            <td *ngFor="let col of columns">
+                                {{rowData[col.field]}}
+                            </td>
+                            <!-- <td>{{rowData.srno}}</td>
+                            <td>{{rowData.name}}</td>
+                            <td>{{rowData.dob}}</td>
+                            <td>{{rowData.phonenumber}}</td>
+                            <td>{{rowData.emailaddress}}</td> -->
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!show">
+        <div>
+            <h3>{{productOpeFlag}} Product</h3>
+            <p-dropdown [options]="ddvCategory" [(ngModel)]="selddvFormCategory" placeholder="Select Product Category" optionLabel="value" [showClear]="true" (onChange)="selAttrByCat()"></p-dropdown>
+            <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+                <!-- productName -->
+                <div class="form-group">
+                    <label>Product Name</label>
+                    <input type="text" formControlName="productName" class="form-control" [ngClass]="{ 'is-invalid': submitted && lgnFrm.productName.errors }" />
+                    <!-- <div *ngIf="submitted && lgnFrm.productName.errors" class="invalid-feedback errormessage">
+                        <div *ngIf="lgnFrm.productName.errors.required">Product Name is required</div>
+                    </div> -->
+                </div>
+                <!-- productDesc -->
+                <div class="form-group">
+                    <label>Product Description</label>
+                    <input type="text" formControlName="productDesc" class="form-control" [ngClass]="{ 'is-invalid': submitted && lgnFrm.productDesc.errors }" />
+                </div>
+                <div class="col-xs-2 prn m-t-1 pull-right">
+                    <button class="btn btn-primary btn-block btn-flat" (click)="manageProduct('cancel');">Cancel</button>
+                </div>
+                <div class="col-xs-2 prn m-t-1 pull-right">
+                    <button class="btn btn-primary btn-block btn-flat" type="submit" [disabled]="isSubmitDisabled">Submit</button>
+                </div>
+            </form>
+            <!-- productAttribute -->
+            <div>
+                <p-dropdown [options]="ddvAttribute" [(ngModel)]="selddvAttribute" placeholder="Select Product Attribute" optionLabel="value" [showClear]="true"></p-dropdown>
+                <label>Enter Value for Selected Attribute</label>
+                <input type="text" [(ngModel)]="attrVal"/>
+                <input class="btn btn-default" type="button" value="Add Attribute" (click)=addAttributeToList(); style="margin-left:10px" [disabled]="isSubmitDisabled">
+            </div>
+            <div>
+                <p-table #dt [columns]="attrCols" [value]="attrDetails" [rows]="5" [resizableColumns]="true">
+                    <ng-template pTemplate="colgroup" let-columns>
+                            <colgroup>
+                                <col *ngFor="let col of columns" [style.width]="col.width">
+                            </colgroup>
+                        </ng-template>
+                        <ng-template pTemplate="header" let-columns>
+                            <tr>
+                                <th *ngFor="let col of columns" [pSortableColumn]="col.field" pResizableColumn>
+                                    {{col.header}}
+                                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-rowData let-columns="columns">
+                            <tr>
+                                <td *ngFor="let col of columns">
+                                    {{rowData[col.field]}}
+                                </td>
+                            </tr>
+                        </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>

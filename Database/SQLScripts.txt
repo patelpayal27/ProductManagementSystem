@@ -1,0 +1,121 @@
+CREATE DATABASE ProductManagementSystem
+
+CREATE TABLE ProductCategory  (
+    ProductCategoryId int NOT NULL IDENTITY(1,1),
+    ProductCategoryName varchar(100) NOT NULL,
+    ProductCategoryDescription varchar(500),
+	PRIMARY KEY (ProductCategoryId)
+);
+CREATE TABLE ProductAttributeLookup  (
+    AttributeId int NOT NULL IDENTITY(1,1),
+    AttributeName varchar(100) NOT NULL,
+    ProductCategoryId int NOT NULL,
+	PRIMARY KEY (AttributeId),
+	FOREIGN KEY (ProductCategoryId) REFERENCES ProductCategory(ProductCategoryId)
+);
+CREATE TABLE Product (
+    ProductId int NOT NULL IDENTITY(1,1),
+	ProductCategoryId int NOT NULL,
+    Name varchar(100),
+    Description varchar(500),
+	PRIMARY KEY (ProductId),
+    FOREIGN KEY (ProductCategoryId) REFERENCES ProductCategory(ProductCategoryId)
+);
+CREATE TABLE ProductAttributes  (
+    ProductId int NOT NULL,
+    AttributeId int NOT NULL,
+	AttributeValue varchar(100) NOT NULL,
+	FOREIGN KEY (ProductId) REFERENCES Product(ProductId),
+	FOREIGN KEY (AttributeId) REFERENCES ProductAttributeLookup(AttributeId)
+);
+
+** ProductCategory::
+insert into ProductCategory values ('Dress', 'Dress Category Description')
+insert into ProductCategory values ('Shoes', 'Shoes Category Description')
+insert into ProductCategory values ('Jacket', 'Jackets Category Description')
+insert into ProductCategory values ('Tops', 'Tops Category Description')
+insert into ProductCategory values ('Bottoms', 'Bottoms Category Description')
+
+** ProductAttributeLookup:
+insert into ProductAttributeLookup values ('size',1)
+insert into ProductAttributeLookup values ('colour',1)
+insert into ProductAttributeLookup values ('brand',1)
+
+insert into ProductAttributeLookup values ('size',2)
+insert into ProductAttributeLookup values ('pattern',2)
+insert into ProductAttributeLookup values ('brand',2)
+
+insert into ProductAttributeLookup values ('size',3)
+insert into ProductAttributeLookup values ('pattern',3)
+insert into ProductAttributeLookup values ('colour',3)
+insert into ProductAttributeLookup values ('brand',3)
+insert into ProductAttributeLookup values ('material',3)
+
+insert into ProductAttributeLookup values ('size',4)
+insert into ProductAttributeLookup values ('material',4)
+insert into ProductAttributeLookup values ('brand',4)
+
+insert into ProductAttributeLookup values ('size',5)
+insert into ProductAttributeLookup values ('pattern',5)
+insert into ProductAttributeLookup values ('brand',5)
+
+** Product::
+insert into Product values (1,'Dress Product 1','Dress Product 1 Desc')
+insert into Product values (1,'Dress Product 2','Dress Product 2 Desc')
+insert into Product values (1,'Dress Product 3','Dress Product 3 Desc')
+insert into Product values (2,'Shoes Product 1','Shoes Product 1 Desc')
+insert into Product values (2,'Shoes Product 2','Shoes Product 2 Desc')
+insert into Product values (3,'Jacket Product 1','Jacket Product 1 Desc')
+insert into Product values (4,'Tops Product 1','Tops Product 1 Desc')
+insert into Product values (4,'Tops Product 2','Tops Product 2 Desc')
+insert into Product values (5,'Bottoms Product 1','Bottoms Product 1 Desc')
+
+** ProductAttributes::ProductId,AttributeId, val
+insert into ProductAttributes values (1,1,'28')
+insert into ProductAttributes values (1,2,'black')
+
+insert into ProductAttributes values (2,1,'30')
+insert into ProductAttributes values (2,2,'yellow')
+
+insert into ProductAttributes values (3,1,'32')
+insert into ProductAttributes values (3,2,'red')
+insert into ProductAttributes values (3,3,'dressberry')
+
+insert into ProductAttributes values (4,4,'8')
+insert into ProductAttributes values (4,5,'closed')
+insert into ProductAttributes values (4,6,'puma')
+
+insert into ProductAttributes values (5,4,'7')
+insert into ProductAttributes values (5,6,'adidas')
+
+insert into ProductAttributes values (6,7,'30')
+insert into ProductAttributes values (6,8,'crossed')
+insert into ProductAttributes values (6,9,'black')
+insert into ProductAttributes values (6,10,'dressberry')
+insert into ProductAttributes values (6,11,'leather')
+
+insert into ProductAttributes values (7,12,'28')
+insert into ProductAttributes values (7,14,'arrow')
+
+insert into ProductAttributes values (8,12,'30')
+insert into ProductAttributes values (8,13,'denim')
+
+insert into ProductAttributes values (9,15,'30')
+
+=========================================== Some SQL Statements used in WEB API =======================================
+GetCategory - SELECT ProductCategoryId,ProductCategoryName,ProductCategoryDescription FROM ProductCategory ORDER BY ProductCategoryId
+
+GetProducts - 
+SELECT p.ProductId,p.ProductCategoryId,pc.ProductCategoryName,p.Name,p.Description 
+FROM Product p 
+JOIN ProductCategory pc ON p.ProductCategoryId = pc.ProductCategoryId 
+ORDER BY p.ProductId
+
+SELECT pa.AttributeId,pa.AttributeValue,pal.AttributeName, pc.ProductCategoryId, pc.ProductCategoryName 
+FROM ProductAttributes pa 
+JOIN ProductAttributeLookup pal on pa.AttributeId = pal.AttributeId  
+JOIN ProductCategory pc on pc.ProductCategoryId = pal.ProductCategoryId 
+WHERE ProductId = 5;
+
+update product set Name = '', Description ='' where ProductId = 1
+update ProductAttributes set AttributeValue = '' where ProductId = 1 and AttributeId = 1

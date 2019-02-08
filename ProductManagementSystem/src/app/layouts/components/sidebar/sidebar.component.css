@@ -1,0 +1,25 @@
+.ui-panelmenu{font-size:14px;padding-top:35px;}
+.ui-panelmenu .ui-panelmenu-content{background:none !important;}
+.ui-widget-content{background: none !important;border:none;}
+.ui-panelmenu .ui-panelmenu-content .ui-menuitem-link {
+  color: #00aeef;
+  background: none;
+}
+  .ui-panelmenu .ui-panelmenu-content .ui-menuitem-link:hover {
+    background: none;
+    color: #00aeef;
+  }
+  .ui-panelmenu .ui-panelmenu-content .ui-menuitem-link:focus {
+    color: #00aeef;
+  }
+
+  .ui-submenu-list li {
+    padding: 5px 0px 5px 44px;
+  }
+.ui-panelmenu .ui-panelmenu-header-link{padding:10px 10px  10px 0;position:relative;}
+.ui-panelmenu-icon{right:0px;}
+.ui-panelmenu .ui-panelmenu-header:not(.ui-state-active):hover a{color:#00aeef;}
+.sidebar-menu .ui-menuitem-icon {
+    font-size: 18px;
+    margin: 0 13px 0 -10px!important;
+}

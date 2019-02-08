@@ -1,0 +1,35 @@
+<div class="content-wrapper login-content">
+  <div class="login-wrap">
+    <div class="login-pnl">
+      <img src="assets/img/contrado.svg" style="margin-top:-30px; height:100px; width:200px;">
+      <h2 style="margin-left:-20px">Product Management System</h2>
+      <h6 style="margin-left:210px">- By Payal Patel</h6>
+    </div>
+    <div class="login-form">
+      <h2>LOGIN</h2>
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <!-- Username -->
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && lgnFrm.username.errors }" />
+            <div *ngIf="submitted && lgnFrm.username.errors" class="invalid-feedback errormessage">
+                <div *ngIf="lgnFrm.username.errors.required">Username is required</div>
+                <div *ngIf="lgnFrm.username.errors.minlength">Username must be at least 4 characters</div>
+            </div>
+        </div>
+        <!-- Password -->
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" formControlName="password" class="form-control" name="password"/>
+            <div *ngIf="submitted && lgnFrm.password.errors" class="invalid-feedback errormessage">
+                <div *ngIf="lgnFrm.password.errors.required">Password is required</div>
+                <div *ngIf="lgnFrm.password.errors.minlength">Password must be at least 8 characters</div>
+            </div>
+        </div>
+        <div class="col-xs-4 prn m-t-1 pull-right">
+          <button class="btn btn-primary btn-block btn-flat" type="submit">Sign In</button>
+        </div>
+    </form>
+    </div>
+  </div>
+</div>

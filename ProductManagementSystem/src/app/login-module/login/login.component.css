@@ -1,0 +1,13 @@
+.login-content{margin:0% auto;top:170px;}
+.login-wrap{width:700px;margin:0 auto;position:relative}
+.login-pnl{background: #fff;width:700px;margin:0% auto;;padding: 42px 0 38px 38px;-moz-box-shadow:-2px 4px 11px 1px #888;
+  -webkit-box-shadow: -2px 4px 11px 1px #888;
+  box-shadow:-2px 4px 11px 1px #888;border:1px solid #ccc;height:180px;}
+.login-pnl h2{font-size:23px;padding:10px 0 5px 0px;color:#707276;}
+.login-form{background: #009dd9;width:300px;padding:20px;position:absolute;top:-66px;right:54px;padding:60px 20px;}
+.login-form h2{font-size: 18px;color:#fff;padding:0px 0 34px 0;}
+input::placeholder {color: #fff !important;}
+.login-form .btn{background:#fff;color:#707276; }
+.login-form .btn:hover{background:#204b5a;color:#fff; }
+.forgot_pass a{color:#fff;}
+.errormessage{color: red}
